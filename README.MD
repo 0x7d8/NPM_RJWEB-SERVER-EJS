@@ -25,11 +25,11 @@ pnpm add rjweb-server-ejs
 ```ts
 // webserver.d.ts
 
-import { MiddlewareToHTTPContext } from "rjweb-server"
+import { MiddlewareToProps } from "rjweb-server"
 import { Props as AdditionalProps1 } from "rjweb-server-ejs"
 
 declare module "rjweb-server" {
-  export interface HTTPRequestContext extends MiddlewareToHTTPContext<[ AdditionalProps1 ]> {}
+  export interface HTTPRequestContext extends MiddlewareToProps<[ AdditionalProps1 ]> {}
 }
 ```
 

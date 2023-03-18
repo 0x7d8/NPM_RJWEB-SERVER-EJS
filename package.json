@@ -1,6 +1,6 @@
 {
   "name": "rjweb-server-ejs",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Easy and Lightweight Way to render EJS files in rjweb-server",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
@@ -14,17 +14,9 @@
   },
   "keywords": [
     "webserver",
-    "RJWEB-SERVER-EJS",
+    "ejs",
     "lightweight",
-    "server",
-    "restful",
-    "rest",
-    "node",
-    "http",
-    "easy",
-    "api",
-    "web",
-    "backend"
+    "parser"
   ],
   "author": "0x4096 (Robert Jansen)",
   "license": "MIT",

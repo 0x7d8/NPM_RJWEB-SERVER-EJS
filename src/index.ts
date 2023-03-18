@@ -6,32 +6,32 @@ import ejs from "ejs"
 import fs from "fs"
 
 export function Init(defaultOptions: ejs.Options = {}): Middleware {
-  return {
-    name: 'rjweb-server-ejs',
+	return {
+		name: 'rjweb-server-ejs',
 
-    code: (ctr: HTTPRequestContextFull, ctx) => {
-      ctr.printEJS = (file, data = {}, options = {}) => {
-        ctx.waiting = true; (async() => {
-          const content = await fs.promises.readFile(path.resolve(file), 'utf8')
+		code: (ctr: HTTPRequestContextFull, ctx) => {
+			ctr.printEJS = (file, data = {}, options = {}) => {
+				ctx.waiting = true; (async() => {
+					const content = await fs.promises.readFile(path.resolve(file), 'utf8')
 
-          ctx.content = Buffer.from(await ejs.render(content, data, {
-            async: true,
-            beautify: false,
-            ...defaultOptions,
-            ...options
-          }))
+					ctx.content = Buffer.from(await ejs.render(content, data, {
+						async: true,
+						beautify: false,
+						...defaultOptions,
+						...options
+					}))
 
-          ctx.events.emit('noWaiting')
-        })()
+					ctx.events.emit('noWaiting')
+				})()
 
-        return ctr
-      }
-    }
-  }
+				return ctr
+			}
+		}
+	}
 }
 
 export interface Props {
-  printEJS: (file: string, data?: ejs.Data, options?: ejs.Options) => HTTPRequestContext
+	printEJS: (file: string, data?: ejs.Data, options?: ejs.Options) => HTTPRequestContext
 }
 
 /** @ts-ignore */
