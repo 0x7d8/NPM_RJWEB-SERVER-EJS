@@ -1,6 +1,6 @@
 {
   "name": "rjweb-server-ejs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Easy and Lightweight Way to render EJS files in rjweb-server",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
@@ -38,10 +38,7 @@
   },
   "devDependencies": {
     "@types/ejs": "^3.1.2",
-    "@types/fluent-ffmpeg": "^2.1.21",
     "@types/node": "^18.15.0",
-    "@types/sequelize": "^4.28.14",
-    "@types/throttle": "^1.0.1",
     "esbuild": "^0.17.11",
     "rjweb-server-ejs": "link:.",
     "typescript": "^4.9.5"

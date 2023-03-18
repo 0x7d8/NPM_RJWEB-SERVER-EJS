@@ -5,7 +5,7 @@ import path from "path"
 import ejs from "ejs"
 import fs from "fs"
 
-export function Init(): Middleware {
+export function Init(defaultOptions: ejs.Options = {}): Middleware {
   return {
     name: 'rjweb-server-ejs',
 
@@ -17,6 +17,7 @@ export function Init(): Middleware {
           ctx.content = Buffer.from(await ejs.render(content, data, {
             async: true,
             beautify: false,
+            ...defaultOptions,
             ...options
           }))
 
