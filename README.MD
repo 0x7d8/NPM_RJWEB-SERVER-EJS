@@ -35,7 +35,7 @@ declare module "rjweb-server" {
 
 ## Usage
 
-Rendering a File
+Rendering a File & Setup
 ```js
 const { Server } = require('rjweb-server')
 const ejs = require('rjweb-server-ejs').Init
