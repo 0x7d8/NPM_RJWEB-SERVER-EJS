@@ -15,14 +15,14 @@ export function Init(defaultOptions: ejs.Options = {}): Middleware {
 					const content = await fs.promises.readFile(path.resolve(file), 'utf8')
 
 					ctx.content = Buffer.from(await ejs.render(content, data, {
-						async: true,
 						beautify: false,
 						...defaultOptions,
-						...options
+						...options,
+						async: true
 					}))
 
 					ctx.events.emit('noWaiting')
-				})()
+				}) ()
 
 				return ctr
 			}
@@ -31,7 +31,7 @@ export function Init(defaultOptions: ejs.Options = {}): Middleware {
 }
 
 export interface Props {
-	printEJS: (file: string, data?: ejs.Data, options?: ejs.Options) => HTTPRequestContext
+	/** Print a Rendered EJS Template File to the Client */ printEJS: (file: string, data?: ejs.Data, options?: ejs.Options) => HTTPRequestContext
 }
 
 /** @ts-ignore */
