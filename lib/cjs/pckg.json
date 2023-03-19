@@ -1,12 +1,12 @@
 {
   "name": "rjweb-server-ejs",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Easy and Lightweight Way to render EJS files in rjweb-server",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
   "scripts": {
     "build": "rm -rf lib && tsc && esbuild `find src \\( -name '*.ts' -o -name '*.tsx' \\)` --platform='node' --ignore-annotations --format='cjs' --outdir='lib/cjs' && esbuild `find src \\( -name '*.ts' -o -name '*.tsx' \\)` --platform='node' --ignore-annotations --format='esm' --outdir='lib/esm' && cp -r lib/typings/* lib/cjs && cp -r lib/typings/* lib/esm && rm -rf lib/typings && cp package.json lib/cjs/pckg.json && cp package.json lib/esm/pckg.json",
-    "test": "yarn build && cd lib && node index.js && cd .."
+    "test": "yarn build && node test"
   },
   "repository": {
     "type": "git",
@@ -25,8 +25,8 @@
   },
   "homepage": "https://github.com/rotvproHD/NPM_RJWEB-SERVER-EJS#readme",
   "dependencies": {
-    "ejs": "^3.1.9",
     "@types/ejs": "^3.1.2",
+    "ejs": "^3.1.9",
     "rjweb-server": "^4.4.0"
   },
   "devDependencies": {

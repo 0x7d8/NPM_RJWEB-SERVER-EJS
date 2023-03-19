@@ -14,14 +14,20 @@ export function Init(defaultOptions: ejs.Options = {}): Middleware {
 				ctx.waiting = true; (async() => {
 					const content = await fs.promises.readFile(path.resolve(file), 'utf8')
 
-					ctx.content = Buffer.from(await ejs.render(content, data, {
-						beautify: false,
-						...defaultOptions,
-						...options,
-						async: true
-					}))
+					try {
+						ctx.content = Buffer.from(await ejs.render(content, data, {
+							beautify: false,
+							root: path.dirname(file),
+							...defaultOptions,
+							...options,
+							async: true
+						}))
 
-					ctx.events.emit('noWaiting')
+						ctr.setHeader('Content-Type', 'text/html')
+						ctx.events.emit('noWaiting')
+					} catch (err) {
+						ctx.handleError(err)
+					}
 				}) ()
 
 				return ctr

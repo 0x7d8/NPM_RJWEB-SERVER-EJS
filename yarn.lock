@@ -255,9 +255,9 @@ minimatch@^5.0.1:
   uid ""
 
 rjweb-server@^4.4.0:
-  version "4.4.3"
-  resolved "https://registry.yarnpkg.com/rjweb-server/-/rjweb-server-4.4.3.tgz#11ecda284fac611d01f108ebba1e3fc05570cf72"
-  integrity sha512-NYVrhhfsCky5AE6wCQev8fIAE8zMrZbos5a5JlHvTg4iwCZBEL/DXahcQUaYZpdaZMSknmdT1RKuzZ8QYYaBxw==
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/rjweb-server/-/rjweb-server-4.4.5.tgz#7ce8b1f405c3f083eb5f16c1fe8df7b1f53373cb"
+  integrity sha512-euFiuzDs7I3NAPagFESARbMus01Uj/WTpyNrP5yPI5aCH4kvV9P3gWi+BbzkNuea8cGWBfhflEb10vsD456mFg==
 
 supports-color@^7.1.0:
   version "7.2.0"
