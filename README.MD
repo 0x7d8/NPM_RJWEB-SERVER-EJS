@@ -46,10 +46,11 @@ const server = new Server({
 
 server.middleware(ejs())
 
-server.prefix('/')
-  .add('GET', '/', (ctr) => {
+server.path('/', (path) => path
+  .http('GET', '/', (ctr) => {
     ctr.printEJS('./index.ejs')
   })
+)
 
 server.start().then((res) => {
   console.log(`Server started on port ${res.port}`)

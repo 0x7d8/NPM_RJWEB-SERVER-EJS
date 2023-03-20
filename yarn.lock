@@ -254,10 +254,10 @@ minimatch@^5.0.1:
   version "0.0.0"
   uid ""
 
-rjweb-server@^4.4.0:
-  version "4.4.5"
-  resolved "https://registry.yarnpkg.com/rjweb-server/-/rjweb-server-4.4.5.tgz#7ce8b1f405c3f083eb5f16c1fe8df7b1f53373cb"
-  integrity sha512-euFiuzDs7I3NAPagFESARbMus01Uj/WTpyNrP5yPI5aCH4kvV9P3gWi+BbzkNuea8cGWBfhflEb10vsD456mFg==
+rjweb-server@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/rjweb-server/-/rjweb-server-5.0.0.tgz#428f0b7a3a0c7f9011ba33aa421ec82e3c397fbf"
+  integrity sha512-40uPUjhfb13B+vd4Gja9EpQaUc2I4NfckcTX9CuzHOOQ5G1pbgQsmgHeBOUIqLYANG0dvP/mMm6Y85KlYGARew==
 
 supports-color@^7.1.0:
   version "7.2.0"
