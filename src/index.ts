@@ -11,11 +11,11 @@ export function Init(defaultOptions: ejs.Options = {}): Middleware {
 
 		code: (ctr: HTTPRequestContextFull, ctx) => {
 			ctr.printEJS = (file, data = {}, options = {}) => {
-				ctx.waiting = true; (async() => {
+				ctx.scheduleQueue('execution', () => new Promise<void>(async(resolve, reject) => {
 					const content = await fs.promises.readFile(path.resolve(file), 'utf8')
 
 					try {
-						ctx.content = Buffer.from(await ejs.render(content, data, {
+						ctx.response.content = Buffer.from(await ejs.render(content, data, {
 							beautify: false,
 							root: path.dirname(file),
 							...defaultOptions,
@@ -24,11 +24,11 @@ export function Init(defaultOptions: ejs.Options = {}): Middleware {
 						}))
 
 						ctr.setHeader('Content-Type', 'text/html')
-						ctx.events.emit('noWaiting')
+						resolve()
 					} catch (err) {
-						ctx.handleError(err)
+						reject(err)
 					}
-				}) ()
+				}))
 
 				return ctr
 			}
