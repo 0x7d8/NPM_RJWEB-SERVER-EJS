@@ -38,13 +38,13 @@ declare module "rjweb-server" {
 Rendering a File & Setup
 ```js
 const { Server } = require('rjweb-server')
-const ejs = require('rjweb-server-ejs').Init
+const ejs = require('rjweb-server-ejs')
 
 const server = new Server({
   port: 8000
 })
 
-server.middleware(ejs())
+server.middleware(ejs.init())
 
 server.path('/', (path) => path
   .http('GET', '/', (ctr) => {
