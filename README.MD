@@ -21,35 +21,25 @@ or
 pnpm add rjweb-server-ejs
 ```
 
-## Add Intellisense (Important for good developer experience!)
-```ts
-// webserver.d.ts
-
-import { MiddlewareToProps } from "rjweb-server"
-import { Props as AdditionalProps1 } from "rjweb-server-ejs"
-
-declare module "rjweb-server" {
-  export interface HTTPRequestContext extends MiddlewareToProps<[ AdditionalProps1 ]> {}
-}
-```
-
 ## Usage
 
 Rendering a File & Setup
 ```js
 const { Server } = require('rjweb-server')
-const ejs = require('rjweb-server-ejs')
+const { eJS } = require('rjweb-server-ejs')
 
 const server = new Server({
   port: 8000
-})
-
-server.middleware(ejs.init())
+}, [
+  eJS.config({})
+])
 
 server.path('/', (path) => path
-  .http('GET', '/', (ctr) => {
-    ctr.printEJS('./index.ejs')
-  })
+  .http('GET', '/', (http) => http
+    .onRequest((ctr) => {
+      ctr.printEJS('./index.ejs')
+    })
+  )
 )
 
 server.start().then((res) => {
