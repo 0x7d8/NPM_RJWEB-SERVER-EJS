@@ -1,45 +1,46 @@
-import { HTTPRequestContext, MiddlewareBuilder, MiddlewareToProps } from "rjweb-server"
-type HTTPRequestContextFull = HTTPRequestContext & MiddlewareToProps<[ Props ]>
+import { HttpRequest, MiddlewareBuilder } from "rjweb-server"
 
 import path from "path"
 import ejs from "ejs"
 import fs from "fs"
 
-const { init } = new MiddlewareBuilder<ejs.Options, { options: ejs.Options }>()
-	.init((lCtx, config) => {
-		lCtx.options = config
-	})
-	.http((lCtx, stop, ctr: HTTPRequestContextFull, ctx) => {
-		ctr.printEJS = (file, data = {}, options = {}) => {
-			ctx.scheduleQueue('execution', () => new Promise<void>(async(resolve, reject) => {
-				const content = await fs.promises.readFile(path.resolve(file), 'utf8')
+class Http extends HttpRequest {
+	/**
+	 * Print an EJS File to the Client
+	 * @since 1.3.0
+	 * @from rjweb-server-ejs
+	*/ public printEJS(file: string, data: ejs.Data = {}, options: ejs.Options = {}): this {
+		this.ctx.scheduleQueue('execution', () => new Promise<void>(async(resolve, reject) => {
+			const content = await fs.promises.readFile(path.resolve(file), 'utf8')
 
-				try {
-					ctx.response.content = Buffer.from(await ejs.render(content, data, {
-						beautify: false,
-						root: path.dirname(file),
-						...lCtx.options,
-						...options,
-						async: true
-					}))
+			try {
+				this.ctx.response.content = Buffer.from(await ejs.render(content, data, {
+					beautify: false,
+					root: path.dirname(file),
+					...globalOptions,
+					...options,
+					async: true
+				}))
 
-					ctr.setHeader('Content-Type', 'text/html')
-					resolve()
-				} catch (err) {
-					reject(err)
-				}
-			}))
+				this.setHeader('Content-Type', 'text/html')
+				resolve()
+			} catch (err) {
+				reject(err)
+			}
+		}))
 
-			return ctr
-		}
-	})
-	.build()
-
-export { init } 
-
-export interface Props {
-	/** Print a Rendered EJS Template File to the Client */ printEJS: (file: string, data?: ejs.Data, options?: ejs.Options) => HTTPRequestContext
+		return this
+	}
 }
 
+let globalOptions: ejs.Options = {}
+export const eJS = new MiddlewareBuilder<{}, ejs.Options>()
+	.init((lCtx, config) => {
+		globalOptions = config
+	})
+	.httpClass((E) => Http)
+	.build()
+
 /** @ts-ignore */
-export { version as Version } from "./pckg.json"
+import { version } from "./pckg.json"
+export const Version: string = version
