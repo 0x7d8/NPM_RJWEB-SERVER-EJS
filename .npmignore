@@ -1,11 +1,12 @@
-# TESTING
 test/
-
-# SOURCE
 src/
-
-# OTHER
-examples/
+docs/
+templates/
 .github/
-pnpm-lock.yaml
+.editorconfig
+yarn.lock
+yarn-error.log
 tsconfig.json
+CHANGELOG.MD
+jest.config.js
+tests/

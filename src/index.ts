@@ -10,20 +10,20 @@ class Http extends HttpRequest {
 	 * @since 1.3.0
 	 * @from rjweb-server-ejs
 	*/ public printEJS(file: string, data: ejs.Data = {}, options: ejs.Options = {}): this {
-		this.ctx.scheduleQueue('execution', () => new Promise<void>(async(resolve, reject) => {
+		this.ctx.setExecuteSelf(() => new Promise(async(resolve, reject) => {
 			const content = await fs.promises.readFile(path.resolve(file), 'utf8')
 
 			try {
-				this.ctx.response.content = Buffer.from(await ejs.render(content, data, {
+				this.ctx.response.content = await ejs.render(content, data, {
 					beautify: false,
 					root: path.dirname(file),
 					...globalOptions,
 					...options,
 					async: true
-				}))
+				})
 
 				this.setHeader('Content-Type', 'text/html')
-				resolve()
+				resolve(true)
 			} catch (err) {
 				reject(err)
 			}
@@ -38,7 +38,7 @@ export const eJS = new MiddlewareBuilder<{}, ejs.Options>()
 	.init((lCtx, config) => {
 		globalOptions = config
 	})
-	.httpClass((E) => Http)
+	.httpClass(() => Http)
 	.build()
 
 /** @ts-ignore */
