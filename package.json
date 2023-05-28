@@ -1,6 +1,6 @@
 {
   "name": "rjweb-server-ejs",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Easy and Lightweight Way to render EJS files in rjweb-server",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
