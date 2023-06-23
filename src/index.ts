@@ -55,7 +55,7 @@ export const eJS = new MiddlewareBuilder<Options, { config: Options }>()
 
 					let location = file
 					if (lCtx.config.rootFilePath) location = await handleRootFile(config.root, file)
-					this.ctx.response.content = await ejs.renderFile(location, data, config)
+					this.ctx.response.content = [ await ejs.renderFile(location, data, config) ]
 
 					this.headers.set('Content-Type', 'text/html')
 					resolve(true)
